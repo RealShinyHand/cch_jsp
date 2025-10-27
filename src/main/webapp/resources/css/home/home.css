@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+	margin: 0;
+	padding: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f5f5f5;
+	color: #333;
 }
 
 .header {
@@ -27,23 +27,35 @@ body {
 	float: right;
 	font-size: 22px;
 	cursor: pointer;
-	padding: 14px 20px;
 }
 
+.headerTitle{
+	display: none;
+}
 
 @media screen and (max-width: 768px) {
 	.header a {
 		display: none;
 	} /* 메뉴 숨김 */
-	.header a.icon {
+	
+	.headerTitle{
 		display: block;
-		text-align: right;
-		float: none;
+		height: 30px;
+	}
+	.header .headerTitle *{
+		display : inline-block;
+		color:white;
+	}
+	.headerTitle h5{
+		margin: 15px 20px;
+		font-size: 20px;
+	}
+	#toggleButton{
+		float: right;
 	}
 }
 
-
-.header.responsive a:not(#toggleButton){
+.header.responsive a:not(#toggleButton) {
 	display: block;
 	float: none;
 	text-align: left;
