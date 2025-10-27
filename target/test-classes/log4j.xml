@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- 콘솔 출력 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-5level: %logger - %msg%n"/>
+        </Console>
+
+        <!-- 파일 출력 -->
+        <RollingFile name="File" fileName="C:/logs/app2.log"
+                     filePattern="C:/logs/app2-%d{yyyy-MM-dd-HH-mm-ss}.log.gz">
+            <PatternLayout pattern="%-5level: %logger - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
