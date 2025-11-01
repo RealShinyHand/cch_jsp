@@ -17,3 +17,12 @@ Tomcat(WAS) / (root)로 접근 시 바로 cch web application으로 이동하도
 대략적 erd(개념)<br/>
 
 <img width="384" height="311" alt="image" src="https://github.com/user-attachments/assets/66809cb5-e9e5-48df-90d4-4a80ddd91c46" /><br/>
+
+
+2025-11-01 ERD(논리적)
+<img width="1751" height="612" alt="jsp_cch" src="https://github.com/user-attachments/assets/f354b741-cb97-4eb0-a87d-bc3b24f0fbbc" /><br/>
+<ol>
+  <li>메뉴의 자신 테이블과 참조는 작성자가 글 작성 시, 답글에 대한 관계를 나타낸다.</li>
+  <li>비식별 관계에는 FK 제약 조건을 적용하지 않는다. Appplication 단에서 처리하도록 한다.</li>
+</ol>
+
