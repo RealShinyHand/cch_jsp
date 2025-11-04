@@ -26,3 +26,76 @@ Tomcat(WAS) / (root)로 접근 시 바로 cch web application으로 이동하도
   <li>비식별 관계에는 FK 제약 조건을 적용하지 않는다. Appplication 단에서 처리하도록 한다.</li>
 </ol>
 
+2025-11-04 (물리적)
+<code>
+CREATE TABLE t_user (
+    user_id NUMBER GENERATED ALWAYS AS IDENTITY,
+    username NVARCHAR2(30) NOT null,
+    password NVARCHAR2(100) NOT null,
+    user_nickname NVARCHAR2(30) NOT null,
+    grade CHAR(10) NOT null,
+    created_at DATE NOT null,
+    deleted_at DATE,
+    is_delete CHAR(1) DEFAULT 'N',
+    CONSTRAINT PK_T_USER PRIMARY KEY (user_id)
+);
+
+
+CREATE TABLE t_inquery_board (
+    inquery_board_id NUMBER GENERATED ALWAYS AS IDENTITY ,
+    title NVARCHAR2(100) NOT NULL,
+    content NVARCHAR2(2000) NOT NULL,
+    is_reply CHAR(1) DEFAULT 'N',
+    updated_at DATE,
+    created_at DATE NOT NULL,
+    deleted_at DATE,
+    is_delete CHAR(1) DEFAULT 'N',
+    user_id NUMBER NOT NULL,
+    inquery_board_parent_id NUMBER,
+    CONSTRAINT PK_T_INQUERY_BOARD PRIMARY KEY(inquery_board_id)
+);
+
+CREATE INDEX idx_t_inquery_board_user_id
+    ON t_inquery_board (user_id);
+
+
+CREATE TABLE t_inquery_board_image (
+    inquery_board_image_id NUMBER GENERATED ALWAYS AS IDENTITY,
+    uri NVARCHAR2(1000) NOT NULL,
+    created_at DATE NOT NULL,
+    is_delete CHAR(1) DEFAULT 'N',
+    inquery_board_id NUMBER,
+    CONSTRAINT PK_T_INQUERY_BOARD_IMAGE PRIMARY KEY (inquery_board_image_id)
+    
+);
+CREATE INDEX idx_t_inquery_board_image_inquery_board_id
+    ON t_inquery_board_image(inquery_board_id);
+
+CREATE TABLE t_menu_category (
+    menu_category_id NUMBER GENERATED ALWAYS AS IDENTITY,
+    name NVARCHAR2(100) NOT null,
+    ordering NUMBER,
+    CONSTRAINT PK_T_MENU_CATEGORY PRIMARY KEY (menu_category_id)
+);
+
+CREATE TABLE t_menu (
+    menu_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    menu_category_id NUMBER NULL,
+    name NVARCHAR2(100) NOT NULL,
+    price NVARCHAR2(100) ,
+    "desc" NVARCHAR2(500) ,
+    ordering NUMBER ,
+    created_at DATE,
+    updated_at DATE,
+    CONSTRAINT FK_T_MENU_TO_CATEGORY
+        FOREIGN KEY (menu_category_id)
+        REFERENCES t_menu_category (menu_category_id)
+);
+CREATE INDEX idx_t_menu_menu_category_id
+    ON t_menu (menu_category_id);
+</code>
+<br/>
+<h5>이전 ERD(논리적)과 많이 변했다.</h5>
+<h5>기본키들은 GENERATED ALWAYS AS IDENTITY을 써서 Auto Increment로 설정</h5>
+<h5>직접적인 FK는 T_Menu에만 존재</h5>
+<h5>이외 Not NULL 설정과 Join을 위한 Index설정 등을 시행</h5>
