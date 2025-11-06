@@ -19,13 +19,7 @@
 </head>
 <body>
 
-	<div class="header" id="mainHeader">
-		<div class="headerTitle">
-			<h5>천천희</h5>
-			<a href="javascript:void(0);" class="icon" id="toggleButton">&#9776;</a>
-		</div>
-		<a href="/home">Home</a> <a href="/Menu">Menu</a> <a href="/contact">Contact</a>
-	</div>
+	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<main>
 	<div>
 	이미지
