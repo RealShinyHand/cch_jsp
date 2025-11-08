@@ -1,4 +1,4 @@
-package com.skj_personal.cch.home;
+package com.skj_personal.cch.controller;
 
 import java.util.Locale;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.skj_personal.cch.home.service.HomeService;
+import com.skj_personal.cch.service.home.HomeService;
 
 import lombok.RequiredArgsConstructor;
 

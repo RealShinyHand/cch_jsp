@@ -1,5 +1,4 @@
-package com.skj_personal.cch.home;
-
+package com.skj_personal.cch.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(path = {"/Menu"})
-public class MenuController {
-
-	private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
+@RequestMapping(value = {"/contact"})
+public class ContactController {
+	private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
 
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -25,7 +23,8 @@ public class MenuController {
 		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/menu/index");
+		
+		mav.setViewName("/contact/index");
 		mav.addObject("test", "test");
 		
 		return mav;

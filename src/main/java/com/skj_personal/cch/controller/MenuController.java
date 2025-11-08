@@ -1,4 +1,5 @@
-package com.skj_personal.cch.home;
+package com.skj_personal.cch.controller;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -6,14 +7,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = {"/contact"})
-public class ContactController {
-	private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
+@RequestMapping(path = {"/Menu"})
+public class MenuController {
+
+	private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -23,10 +28,19 @@ public class ContactController {
 		
 		
 		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("/contact/index");
+		mav.setViewName("/menu/index");
 		mav.addObject("test", "test");
 		
 		return mav;
 	}
+	
+	@PostMapping("/image")
+    public String multiFileUpload(
+            @RequestParam("multiFile") MultipartFile multipartFile,
+            HttpServletRequest request
+    ) {
+		logger.info("multipartFiles");
+
+        return "result";
+    }
 }

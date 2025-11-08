@@ -26,7 +26,8 @@ Tomcat(WAS) / (root)로 접근 시 바로 cch web application으로 이동하도
   <li>비식별 관계에는 FK 제약 조건을 적용하지 않는다. Appplication 단에서 처리하도록 한다.</li>
 </ol>
 
-2025-11-04 (물리적)
+2025-11-04 (물리적)<br/>
+(메뉴 image 누락되어 수정)
 <code>
 CREATE TABLE t_user (
     user_id NUMBER GENERATED ALWAYS AS IDENTITY,
@@ -93,6 +94,22 @@ CREATE TABLE t_menu (
 );
 CREATE INDEX idx_t_menu_menu_category_id
     ON t_menu (menu_category_id);
+
+
+CREATE TABLE t_menu_image (
+    menu_image_id NUMBER GENERATED ALWAYS AS IDENTITY,
+    uri NVARCHAR2(1000) NOT NULL,
+    created_at DATE NOT NULL,
+    is_delete CHAR(1) DEFAULT 'N',
+    menu_id NUMBER,
+    CONSTRAINT PK_T_MENU_IMAGE PRIMARY KEY (menu_image_id)
+    
+);
+
+CREATE INDEX idx_t_menu_image_menu_id
+    ON t_menu_image(menu_id);
+
+
 </code>
 <br/>
 <h5>이전 ERD(논리적)과 많이 변했다.</h5>
