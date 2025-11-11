@@ -110,9 +110,16 @@ CREATE INDEX idx_t_menu_image_menu_id
     ON t_menu_image(menu_id);
 
 
+
+
 </code>
 <br/>
 <h5>이전 ERD(논리적)과 많이 변했다.</h5>
 <h5>기본키들은 GENERATED ALWAYS AS IDENTITY을 써서 Auto Increment로 설정</h5>
 <h5>직접적인 FK는 T_Menu에만 존재</h5>
 <h5>이외 Not NULL 설정과 Join을 위한 Index설정 등을 시행</h5>
+
+
+<h2>Mybatis Plugin 에러(sts3에서 mybatis 최신 디펜던시 문제)</h2>
+<h5>https://e-7-e.tistory.com/67</h5>
+<text>위 블로그 이용, offline 설치등 나머지 plugin들은 mybatis 공식 git hub 에서도 다운이 만료되어있음</text><br/>
