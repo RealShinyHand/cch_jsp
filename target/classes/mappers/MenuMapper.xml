@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skj_personal.ccj.service.menu.MenuRepository">
+
+<select id="selectOneByMenuId" resultType="com.skj_personal.cch.service.menu.dto.MenuDO">
+
+	select 
+</select>
+
+
+</mapper>
