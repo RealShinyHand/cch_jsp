@@ -1,6 +1,9 @@
 package com.skj_personal.cch.service.menu.dto;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,13 +14,17 @@ import lombok.Setter;
 public class MenuDO {
 
 	private long menuId;
-	private long menuCategoryId;
+	
+	private MenuCategoryDO menuCategory;
+	
 	private String name;
 	private String price;
 	private String desc;
 	private int ordering;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
+	
+	private List<MenuImageDO> menuImageList;
 	
 	/***
 	 * @param name 등록될 메뉴 이름(필수)
@@ -26,6 +33,7 @@ public class MenuDO {
 	public Builder builder(String name) {
 		Builder temp = new Builder();
 		temp.target.name = name;
+		
 		return temp;
 	}
 	
@@ -37,8 +45,8 @@ public class MenuDO {
 			target = new MenuDO();
 		}
 		
-		public Builder menuCategoryId(long menuCategoryId) {
-			target.setMenuCategoryId(menuCategoryId); 
+		public Builder menuCategoryId(MenuCategoryDO menuCategory) {
+			target.setMenuCategory(menuCategory); 
 			return this;
 		}
 		
@@ -63,14 +71,21 @@ public class MenuDO {
 		}
 		
 		public Builder createdAt(LocalDateTime createdAt) {
-			target.setCreatedAt(createdAt);
+			
+			target.setCreatedAt(Timestamp.valueOf(createdAt));
 			return this;
 		}
 		
 		public Builder updatedAt(LocalDateTime updatedAt) {
-			target.setUpdatedAt(updatedAt);
+			target.setUpdatedAt(Timestamp.valueOf(updatedAt));
 			return this;
 		}
+		
+		public Builder menuCategoryId(List<MenuImageDO> menuImageList) {
+			target.setMenuImageList(menuImageList); 
+			return this;
+		}
+		
 		
 		public MenuDO build() {
 			return target;

@@ -14,17 +14,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.skj_personal.cch.service.menu.MenuService;
+
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 @RequestMapping(path = {"/Menu"})
 public class MenuController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
+	private final MenuService menuService;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request, Model model) {
 		logger.info("Get", request.getLocalName());
 		
+		try {
+			menuService.selectOne(1L);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		ModelAndView mav = new ModelAndView();

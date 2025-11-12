@@ -1,15 +1,21 @@
 package com.skj_personal.cch.service.menu;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Service;
 
 import com.skj_personal.cch.service.menu.dto.MenuCategoryDO;
 import com.skj_personal.cch.service.menu.dto.MenuDO;
 
 import lombok.RequiredArgsConstructor;
 
+@Service
 @RequiredArgsConstructor
 public class MenuServiceImpl implements MenuService{
 
+	private final SqlSessionFactory sqlSessionFactory;
 	private final MenuRepository menuRepo;
 	
 	@Override
@@ -19,12 +25,18 @@ public class MenuServiceImpl implements MenuService{
 	}
 
 	@Override
-	public List<MenuDO> selectOne(long menuId) throws Exception {
+	public MenuDO selectOne(long menuId) throws Exception {
 		// TODO Auto-generated method stub
 		
-		menuRepo.selectOneByMenuId(menuId);
+		for (String name : sqlSessionFactory.getConfiguration().getMappedStatementNames()) {
+	        System.out.println("Mapped: " + name);
+	    }
 		
-		return null;
+		var result = menuRepo.selectOneByMenuId(menuId);
+		
+		var returnValue = result.orElseThrow();
+		
+		return returnValue ;
 	}
 
 	@Override

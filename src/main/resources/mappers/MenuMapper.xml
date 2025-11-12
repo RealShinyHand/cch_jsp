@@ -1,10 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skj_personal.ccj.service.menu.MenuRepository">
+<mapper namespace="com.skj_personal.cch.service.menu.MenuRepository">
 
-<select id="selectOneByMenuId" resultType="com.skj_personal.cch.service.menu.dto.MenuDO">
+<resultMap type="com.skj_personal.cch.service.menu.dto.MenuCategoryDO" id="menuCategoryDo">
+<id property="menuCategoryId" column="menuCategory_MENU_CATEGORY_ID"/>
+<result property="name" column="menuCategory_NAME"/>
+<result property="ordering" column="menuCategory_ORDERING"/>
+</resultMap>
 
-	select 
+
+<resultMap type="com.skj_personal.cch.service.menu.dto.MenuDO" id="menuDO">
+	<id property="menuId" column="MENU_ID"/>
+	<result property="name" column="NAME"/>
+	<result property="price" column="PRICE"/>
+	<result property="desc" column="menu_desc"/>
+	<result property="ordering" column="ORDERING"/>
+	<result property="createdAt" column="CREATED_AT"/>
+	<result property="updatedAt" column="UPDATED_AT"/>
+	<association property="menuCategory" resultMap="menuCategoryDo"/>
+	<collection property="menuImageList" ofType="com.skj_personal.cch.service.menu.dto.MenuImageDO">
+		<id property="menuImageID" column="MENU_IMAGE_ID"/>
+		<result property="URI" column="URI"/>
+		<result property="createdAt" column="MENU_IMAGE_CreatedAt"/>
+		<result property="isDelete" column="MENU_IMAGE_IsDelete"/>
+	</collection>
+</resultMap>
+
+<select id="selectOneByMenuId" resultMap="menuDO" parameterType="long">
+
+SELECT 
+tm.MENU_ID, 
+tm.NAME, 
+tm.PRICE, 
+menu_desc,
+tm.ORDERING,
+tm.CREATED_AT, 
+tm.UPDATED_AT,
+tmc.MENU_CATEGORY_ID AS menuCategory_MENU_CATEGORY_ID,
+NVL(TO_CHAR(tmc.NAME),'미지정') AS menuCategory_NAME,
+tmc.ordering AS menuCategory_ORDERING,
+tmi.MENU_IMAGE_ID,
+tmi.URI,
+tmi.CREATED_AT AS MENU_IMAGE_CreatedAt,
+tmi.IS_DELETE  AS MENU_IMAGE_IsDelete
+FROM T_MENU tm
+LEFT OUTER JOIN T_MENU_CATEGORY tmc
+ON tm.MENU_CATEGORY_ID  = tmc.MENU_CATEGORY_ID 
+LEFT OUTER JOIN T_MENU_IMAGE tmi 
+ON tmi.MENU_ID  = tm.MENU_ID
+WHERE tm.MENU_ID = #{menuId}
+
 </select>
 
 

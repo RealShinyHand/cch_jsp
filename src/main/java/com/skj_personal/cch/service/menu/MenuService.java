@@ -1,6 +1,7 @@
 package com.skj_personal.cch.service.menu;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.skj_personal.cch.service.menu.dto.MenuCategoryDO;
 import com.skj_personal.cch.service.menu.dto.MenuDO;
@@ -20,7 +21,7 @@ public interface MenuService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<MenuDO> selectOne(long menuId) throws Exception;
+	MenuDO selectOne(long menuId) throws Exception;
 	
 	List<MenuDO> selectAll() throws Exception;
 	
