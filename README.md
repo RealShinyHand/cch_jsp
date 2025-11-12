@@ -123,3 +123,10 @@ CREATE INDEX idx_t_menu_image_menu_id
 <h2>Mybatis Plugin 에러(sts3에서 mybatis 최신 디펜던시 문제)</h2>
 <h5>https://e-7-e.tistory.com/67</h5>
 <text>위 블로그 이용, offline 설치등 나머지 plugin들은 mybatis 공식 git hub 에서도 다운이 만료되어있음</text><br/>
+
+<h3>Mapper.xml문제(2025-11-12)</h3>
+<p>association사용 시 select 구문의 열 순서를 result맵과 동일하게 해야 동작을하더라. 그렇지 않을 경우
+열과 resultMap이 순서로만 배치되면 DB ResultMap 값과 DO객체 필드들의 순서가 맞지 않아 오류가 발생함
+근데 열이름 unique하게 다 설정했는데도 이러면 왜 사용해야되나 싶다.
+해결 방법있는지 찾아봐야겠다.
+</p>
